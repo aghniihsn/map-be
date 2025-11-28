@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors(
     {
-        origin: 'https://github.com/aghniihsn/map-fe', 
+        origin: 'https://aghniihsn.github.io', 
         methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization']
     }
