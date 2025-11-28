@@ -1,4 +1,3 @@
-// backend/server.js
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -16,11 +15,10 @@ mongoose.connect(MONGO_URI)
   .then(() => console.log('✅ MongoDB Terhubung!'))
   .catch(err => console.error(err));
 
-// --- 1. UPDATE SCHEMA (Tambah field baru) ---
 const LocationSchema = new mongoose.Schema({
     nama: String,
-    deskripsi: String, // Tambahan
-    kategori: String,  // Tambahan (misal: 'wisata', 'kuliner')
+    deskripsi: String, 
+    kategori: String,  
     latitude: Number,
     longitude: Number,
     waktu: { type: Date, default: Date.now }
@@ -28,9 +26,7 @@ const LocationSchema = new mongoose.Schema({
 
 const Location = mongoose.model('Location', LocationSchema);
 
-// --- ROUTES ---
 
-// GET: Ambil semua data
 app.get('/api/locations', async (req, res) => {
     try {
         const data = await Location.find();
@@ -40,7 +36,6 @@ app.get('/api/locations', async (req, res) => {
     }
 });
 
-// POST: Simpan data (Update menerima field baru)
 app.post('/api/locations', async (req, res) => {
     const { nama, deskripsi, kategori, latitude, longitude } = req.body;
 
@@ -56,7 +51,6 @@ app.post('/api/locations', async (req, res) => {
     }
 });
 
-// DELETE: Hapus lokasi berdasarkan ID (Fitur Baru)
 app.delete('/api/locations/:id', async (req, res) => {
     try {
         await Location.findByIdAndDelete(req.params.id);
